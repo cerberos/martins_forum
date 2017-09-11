@@ -11,7 +11,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $posts = Post::paginate(env('HOME_PAGINATE',15))->load('user');
-        return view('home', compact('posts'));
+        $paginate = Post::paginate(env('HOME_PAGINATE',15));
+        $posts = $paginate->load('user');
+        return view('home', compact(['posts','paginate']));
     }
 }

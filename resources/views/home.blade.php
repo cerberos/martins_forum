@@ -18,7 +18,11 @@
                 </div>
             </div>
             @endforeach
-            {{ $posts->links() }}
+
+            <div class="">
+                {{ $paginate->links() }}
+            </div>
+
         </div>
     </div>
 

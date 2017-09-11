@@ -42,3 +42,7 @@ div.clickable {
   cursor: pointer;
   cursor: hand;
 }
+
+.pagination {
+  margin-top: 20px;
+}
