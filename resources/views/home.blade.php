@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @foreach($posts as $post)
-            <div class="card clickable" href="#">
+            <div class="card clickable" href="{{ $post->path() }}">
                 <div class="card-header">
                     {{ $post->user->name }}
                     <span class="badge badge-secondary">{{ $post->replies_count }} {{str_plural('reply', $post->replies_count)}}</span>
@@ -25,7 +25,5 @@
 
         </div>
     </div>
-
-    {{-- $posts->links() --}}
 </div>
 @endsection
