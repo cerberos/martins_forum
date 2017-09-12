@@ -18,7 +18,7 @@
 
                 @foreach($replies as $reply)
                     <div class="card border-dark mb-3">
-                        <div class="card-header">{{ $reply->user->name }} said {{$reply->created_at->diffForHumans()}}:</div>
+                        <div class="card-header"><a href="#"> {{ $reply->user->name }}</a> said {{$reply->created_at->diffForHumans()}}:</div>
                         <div class="card-body text-dark">
                             <p class="card-text">{{ $reply->post }}</p>
                         </div>
@@ -39,7 +39,7 @@
                         <button type="submit" class="btn btn-default">Post</button>
                     </form>
                 @else
-                    <p class="text-center">Please <a href="{{route('login')}}">sign in</a> to participate in this discussion!</p>
+                    <p class="text-center">Please <a href="#" data-toggle="modal" data-target="#login">sign in</a> to participate in this discussion!</p>
                 @endif
 
             </div>
