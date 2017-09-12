@@ -34,18 +34,27 @@
     </div>
 </div>
 
+<div class="container">
+
     @if(count($errors)>0)
-        <div class="alert alert-danger" role="alert" style="margin: 0px">
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 0px">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <!--<span aria-hidden="true">&times;</span>-->
+                <i class="fa fa-window-close-o" aria-hidden="true"></i>
+
+            </button>
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach
             </ul>
         </div>
+
     @endif
 
     @yield('content')
-
+</div>
     <footer class="footer">
         <div class="container">
             <span class="text-muted">Copyright Martin Zani © 2017</span>
@@ -56,9 +65,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/4967b0e393.js"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+
 
 </body>
 </html>
