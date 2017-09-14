@@ -9,6 +9,10 @@ class Post extends Model
 
     protected $guarded = ['post'];
 
+    protected $fillable = [
+        'title', 'description',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

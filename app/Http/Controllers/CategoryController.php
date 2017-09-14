@@ -12,8 +12,12 @@ class CategoryController extends Controller
 
     public function show($id)
     {
+        $active='';
         $id = $this->decrypt($id);
         $category = Category::find($id);
-        return $category->posts()->get();
+        $paginate = $category->posts()->get();
+        $posts = $paginate->load('user');
+
+        return view('categories.show', compact(['category','active','paginate','posts']));
     }
 }

@@ -13,13 +13,6 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Category::class, function (Faker $faker) {
-    return [
-        'title' => $faker->sentence(4),
-        'description' => $faker->text(300),
-    ];
-});
-
 
 $factory->define(App\Post::class, function (Faker $faker) {
     return [
