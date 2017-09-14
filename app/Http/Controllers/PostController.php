@@ -14,13 +14,16 @@ class PostController extends Controller
 
     public function index()
     {
-        return $posts = Post::paginate(10);
-        return view('home', compact('posts'));
+        $active = 'allPosts';
+        $paginate = Post::paginate(env('HOME_PAGINATE',15));
+        $posts = $paginate->load('user');
+        return view('post.index', compact(['posts','paginate','active']));
     }
 
     public function create()
     {
-        return view('post.create');
+        $active = 'createPost';
+        return view('post.create',compact('active'));
     }
 
     public function store(Request $request)
@@ -43,10 +46,11 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $active = '';
         $posts = Post::find($id)->load('user');
         $paginate = $posts->replies()->paginate(env('HOME_PAGINATE',15));
         $replies = $paginate->load('user');
 
-        return view('post.show',compact(['posts', 'replies', 'paginate']));
+        return view('post.show',compact(['posts', 'replies', 'paginate', 'active']));
     }
 }

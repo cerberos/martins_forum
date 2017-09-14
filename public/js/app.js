@@ -3,11 +3,11 @@
 // });
 
 window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+    $(".notification").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove();
     });
 }, 2500);
 
-$("div.clickable").click(function() {
+$(".clickable").click(function() {
     window.location = $(this).attr("href");
 });

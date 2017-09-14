@@ -18,7 +18,7 @@
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
-                        <label for="body">Example textarea</label>
+                        <label for="body">Your Post Body</label>
                         <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
                     </div>
                     <div class="form-group">

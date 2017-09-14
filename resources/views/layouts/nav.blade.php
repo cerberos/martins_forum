@@ -1,31 +1,37 @@
 <!-- Fixed navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item {{ $active=='home' ? 'active':'' }}">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/test">Link</a>
+            <li class="nav-item {{ $active=='allPosts' ? 'active':'' }}">
+                <a class="nav-link" href="/posts">All Posts</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            @auth
+                <li class="nav-item {{ $active=='createPost' ? 'active':'' }}">
+                    <a class="nav-link" href="/post/create">Create Post</a>
+                </li>
+            @endauth
         </ul>
 
         <div class="form-inline mt-2 mt-md-0" style="margin-right: 10px">
             <ul class="navbar-nav">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item justify-content-end"><a href="#" data-toggle="modal" data-target="#login" class="nav-link">Login</a></li>
-                    <li class="nav-item justify-content-end"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
+                    <li class="nav-item justify-content-end"><a href="#" data-toggle="modal" data-target="#login"
+                                                                class="nav-link">Login</a></li>
+                    <li class="nav-item {{ $active=='register' ? 'active':'' }} justify-content-end"><a href="{{ route('register') }}"
+                                                                class="nav-link">Register</a></li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                               aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                             <div class="dropdown-menu">
                                 <a href="#" class="dropdown-item">My Profile</a>
 
@@ -35,12 +41,13 @@
                                     Logout
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
                         </li>
-                @endguest
+                    @endguest
             </ul>
         </div>
 

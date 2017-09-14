@@ -11,8 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.min.css">--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.bulma.css') }}">
 </head>
 <body>
 @include('layouts.nav')
@@ -34,27 +36,22 @@
     </div>
 </div>
 
-<div class="container">
 
     @if(count($errors)>0)
-
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 0px">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <!--<span aria-hidden="true">&times;</span>-->
-                <i class="fa fa-window-close-o" aria-hidden="true"></i>
-
-            </button>
+        <div class="notification is-danger" style="margin-top: 0px">
+            <button class="delete"></button>
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{$error}}</li>
                 @endforeach
             </ul>
         </div>
-
     @endif
 
-    @yield('content')
-</div>
+    <div class="container">
+        @yield('content')
+    </div>
+
     <footer class="footer">
         <div class="container">
             <span class="text-muted">Copyright Martin Zani © 2017</span>
