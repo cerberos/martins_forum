@@ -7,14 +7,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ $active=='home' ? 'active':'' }}">
+            <li class="nav-item @if(! empty($active)) {{ $active=='home' ? 'active':'' }} @endif">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item {{ $active=='allPosts' ? 'active':'' }}">
+            <li class="nav-item @if(! empty($active)) {{ $active=='allPosts' ? 'active':'' }} @endif">
                 <a class="nav-link" href="/posts">All Posts</a>
             </li>
             @auth
-                <li class="nav-item {{ $active=='createPost' ? 'active':'' }}">
+                <li class="nav-item @if(! empty($active)) {{ $active=='createPost' ? 'active':'' }} @endif">
                     <a class="nav-link" href="/post/create">Create Post</a>
                 </li>
             @endauth
@@ -26,7 +26,7 @@
                 @guest
                     <li class="nav-item justify-content-end"><a href="#" data-toggle="modal" data-target="#login"
                                                                 class="nav-link">Login</a></li>
-                    <li class="nav-item {{ $active=='register' ? 'active':'' }} justify-content-end"><a href="{{ route('register') }}"
+                    <li class="nav-item @if(! empty($active)) {{ $active=='register' ? 'active':'' }} @endif justify-content-end"><a href="{{ route('register') }}"
                                                                 class="nav-link">Register</a></li>
                     @else
                         <li class="nav-item dropdown">

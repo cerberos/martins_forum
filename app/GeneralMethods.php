@@ -12,7 +12,7 @@ namespace App;
 use Hashids\Hashids;
 
 
-trait GeneralMethods
+class GeneralMethods
 {
     private $hashids;
 
@@ -26,7 +26,7 @@ trait GeneralMethods
     }
 
     public function decrypt($value){
-        return $this->hashids->decode($value);
+        return $this->hashids->decode($value)[0];
     }
 
 }

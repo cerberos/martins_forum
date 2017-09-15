@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
 
-    protected $fillable = ["title", "description"];
-    use GeneralMethods;
+    protected $fillable = [
+        'title', 'description'
+    ];
+
+    protected $guarded = [];
 
 
     public function posts()
@@ -24,6 +27,6 @@ class Category extends Model
 
     public function path()
     {
-        return '/category/' . $this->encrypt($this->id);
+        return '/category/' . resolve('App\GeneralMethods')->encrypt($this->id);
     }
 }

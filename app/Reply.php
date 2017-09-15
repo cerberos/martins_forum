@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    protected $fillable = [
+        'post', 'post_id', 'user_id'
+    ];
 
     protected $guarded = [];
 

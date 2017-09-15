@@ -10,7 +10,7 @@ class Post extends Model
     protected $guarded = ['post'];
 
     protected $fillable = [
-        'title', 'description',
+        'title', 'description', 'user_id', 'category_id'
     ];
 
     public function user()
