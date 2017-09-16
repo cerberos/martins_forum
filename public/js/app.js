@@ -2,12 +2,12 @@
 //     $('#myInput').focus()
 // });
 
-window.setTimeout(function() {
-    $(".notification").fadeTo(500, 0).slideUp(500, function(){
+window.setTimeout(function () {
+    $(".notification").fadeTo(500, 0).slideUp(500, function () {
         $(this).remove();
     });
-}, 2500);
+}, 4000);
 
-$(".clickable").click(function() {
+$(".clickable").click(function () {
     window.location = $(this).attr("href");
 });

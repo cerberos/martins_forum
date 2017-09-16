@@ -17,7 +17,7 @@ class CreateRepliesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('post_id');
-            $table->text('post');
+            $table->text('body');
             $table->timestamps();
         });
     }

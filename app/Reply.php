@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     protected $fillable = [
-        'post', 'post_id', 'user_id'
+        'body', 'post_id', 'user_id'
     ];
 
     protected $guarded = [];
@@ -20,5 +20,10 @@ class Reply extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function path()
+    {
+        return '/post/' . resolve('App\GeneralMethods')->encrypt($this->post()->get()[0]->id);
     }
 }

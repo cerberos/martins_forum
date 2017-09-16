@@ -14,12 +14,13 @@ class ReplyController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Post $post)
+    public function store($id)
     {
+        $post = Post::find(resolve('App\GeneralMethods')->decrypt($id));
         $this->validate(request(), ['post' => 'required']);
 
         $post->addReply([
-            'post' => request('post'),
+            'body' => request('post'),
             'user_id' => auth()->id()
         ]);
 

@@ -13,6 +13,16 @@ class Post extends Model
         'title', 'description', 'user_id', 'category_id'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('replyCount', function ($builder) {
+            $builder->withCount('replies');
+        });
+
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,10 +40,11 @@ class Post extends Model
 
     public function path()
     {
-        return '/post/'.$this->id;
+        return '/post/' . resolve('App\GeneralMethods')->encrypt($this->id);
     }
 
-    public function addReply($reply){
+    public function addReply($reply)
+    {
         $this->replies()->create($reply);
     }
 }

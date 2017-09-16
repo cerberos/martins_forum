@@ -14,9 +14,8 @@ class CategoryController extends Controller
         $active='';
         $id = resolve('App\GeneralMethods')->decrypt($id);
         $category = Category::find($id);
-        $paginate = $category->posts()->paginate(env('HOME_PAGINATE',15));
-        $posts = $paginate->load('user');
+        $posts = $category->posts()->latest()->with('user')->paginate(env('HOME_PAGINATE',15));
 
-        return view('categories.show', compact(['category','active','paginate','posts']));
+        return view('categories.show', compact(['category','active','posts']));
     }
 }

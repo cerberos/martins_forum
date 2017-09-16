@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Post;
 
@@ -15,9 +16,17 @@ class PostController extends Controller
     public function index()
     {
         $active = 'allPosts';
-        $paginate = Post::paginate(env('HOME_PAGINATE',15));
-        $posts = $paginate->load('user');
-        return view('post.index', compact(['posts','paginate','active']));
+        $posts =  Post::latest()->with('user');
+
+        if($id = \request('by')){
+            $user = User::where('id', resolve('App\GeneralMethods')->decrypt($id))->firstOrFail();
+
+            $posts->where('user_id',$user->id);
+        }
+
+        $posts = $posts->paginate(env('HOME_PAGINATE', 15));
+
+        return view('post.index', compact(['posts','active']));
     }
 
     public function create()
@@ -28,17 +37,19 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request['category'] = resolve('App\GeneralMethods')->decrypt($request['category']);
         $this->validate($request,[
             'title' => 'required',
             'body' => 'required',
             'category' => 'required|exists:categories,id'
         ]);
 
+
         $post = Post::create([
             'user_id' => auth()->id(),
-            'category_id' => request('category'),
-            'title' => request('title'),
-            'description' => request('body')
+            'category_id' => $request['category'],
+            'title' => $request['title'],
+            'description' => $request['body']
         ]);
 
         return redirect($post->path());
@@ -47,6 +58,7 @@ class PostController extends Controller
     public function show($id)
     {
         $active = '';
+        $id = resolve('App\GeneralMethods')->decrypt($id);
         $posts = Post::find($id)->load('user');
         $paginate = $posts->replies()->paginate(env('HOME_PAGINATE',15));
         $replies = $paginate->load('user');

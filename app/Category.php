@@ -14,15 +14,20 @@ class Category extends Model
 
     protected $guarded = [];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('postCount', function ($builder) {
+            $builder->withCount('posts');
+        });
+
+    }
+
 
     public function posts()
     {
         return $this->hasMany(Post::class);
-    }
-
-    public function getPostsCount()
-    {
-        return $this->posts()->count();
     }
 
     public function path()

@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
 
             <div class="card text-white bg-dark mb-3">
                 <div class="card-header">
-                    <a href="#" style="color: greenyellow">{{$posts->user->name}}</a>
+                    <a href="{{ route('profile', resolve('App\GeneralMethods')->encrypt($posts->user->id)) }}"
+                       style="color: greenyellow">{{$posts->user->name}}</a>
                     <h4 class="card-title">{{ $posts->title }}</h4>
                 </div>
 
@@ -17,16 +18,18 @@
 
             @foreach($replies as $reply)
                 <div class="card border-dark mb-3">
-                    <div class="card-header"><a href="#"> {{ $reply->user->name }}</a>
+                    <div class="card-header"><a
+                                href="{{ route('profile', resolve('App\GeneralMethods')->encrypt($reply->user->id)) }}">
+                            {{ $reply->user->name }}</a>
                         said {{$reply->created_at->diffForHumans()}}:
                     </div>
                     <div class="card-body text-dark">
-                        <p class="card-text">{{ $reply->post }}</p>
+                        <p class="card-text">{{ $reply->body }}</p>
                     </div>
                 </div>
             @endforeach
 
-            {{ $paginate->links() }}
+            <div class="level-item">{{ $paginate->links() }}</div>
 
             <hr>
 
@@ -36,7 +39,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <textarea name="post" id="post" class="form-control" placeholder="Have something to say?"
-                                  rows="5"></textarea>
+                                  rows="5" value="{{ old('post') }}"></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">Post</button>
                 </form>

@@ -18,15 +18,17 @@ class GeneralMethods
 
     public function __construct()
     {
-        $this->hashids = new Hashids(env('HASH_SALT'),env('HASH_MIN_NUMBER'),env('HASH_ALPHABET'));
+        $this->hashids = new Hashids(env('HASH_SALT'), env('HASH_MIN_NUMBER'), env('HASH_ALPHABET'));
     }
 
-    public function encrypt($value){
+    public function encrypt($value)
+    {
         return $this->hashids->encode($value);
     }
 
-    public function decrypt($value){
-        return $this->hashids->decode($value)[0];
+    public function decrypt($value)
+    {
+        return isset($this->hashids->decode($value)[0]) ? $this->hashids->decode($value)[0] : 0;
     }
 
 }
