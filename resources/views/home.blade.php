@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8">
 
-            @foreach($categories as $category)
+            @forelse($categories as $category)
                 <article class="message is-dark clickable" href="{{ $category->path() }}">
                     <div class="message-header">
                         <div class="level-left">{{ $category->title }}</div>
@@ -14,7 +14,9 @@
                         {{ $category->description }}
                     </div>
                 </article>
-            @endforeach
+            @empty
+                <div class="level-item">There are no records this time</div>
+            @endforelse
 
             <div class="level-item">
                 {{ $categories->links() }}

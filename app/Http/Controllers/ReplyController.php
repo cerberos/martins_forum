@@ -26,4 +26,31 @@ class ReplyController extends Controller
 
         return back();
     }
+
+    public function patch($id)
+    {
+        $this->validate(request(), ['reply' => 'required']);
+
+        $id = resolve('App\GeneralMethods')->decrypt($id);
+        $reply = Reply::find($id);
+
+        $this->authorize('update', $reply);
+
+        $reply->body = request('reply');
+        $reply->save();
+
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $id = resolve('App\GeneralMethods')->decrypt($id);
+        $reply = Reply::find($id);
+
+        $this->authorize('update', $reply);
+
+        $reply->delete();
+
+        return back();
+    }
 }

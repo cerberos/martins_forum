@@ -65,4 +65,37 @@ class PostController extends Controller
 
         return view('post.show',compact(['posts', 'replies', 'paginate', 'active']));
     }
+
+    public function patch($id)
+    {
+        $this->validate(request(),[
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $id = resolve('App\GeneralMethods')->decrypt($id);
+        $post = Post::find($id);
+
+        $this->authorize('update', $post);
+
+        $post->title = request('title');
+        $post->description = request('body');
+
+        $post->save();
+
+        return back();
+    }
+
+    public function destroy($id)
+    {
+
+        $id = resolve('App\GeneralMethods')->decrypt($id);
+        $post = Post::find($id);
+
+        $this->authorize('update', $post);
+
+        $post->delete();
+
+        return redirect('/posts');
+    }
 }

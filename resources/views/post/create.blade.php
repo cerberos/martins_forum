@@ -8,9 +8,11 @@
                     <div class="form-group">
                         <label for="category">Select Category</label>
                         <select class="form-control" id="category" name="category">
-                            @foreach(\App\Category::all() as $category)
+                            @forelse(\App\Category::all() as $category)
                                 <option value="{{resolve('App\GeneralMethods')->encrypt($category->id)}}">{{ $category->title }}</option>
-                            @endforeach
+                            @empty
+                                <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">There are no records this time</div>
+                            @endforelse
                         </select>
                     </div>
                     <div class="form-group">

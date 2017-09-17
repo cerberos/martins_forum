@@ -7,7 +7,7 @@
 
                 <div class="col-md-12">
 
-                    @foreach($posts as $post)
+                    @forelse($posts as $post)
                         <article class="message is-primary clickable" href="{{ $post->path() }}">
                             <div class="message-header">
                                 <div class="level-left"><a
@@ -24,7 +24,9 @@
 
                             </div>
                         </article>
-                    @endforeach
+                    @empty
+                        <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">There are no records this time</div>
+                    @endforelse
 
                     <div class="level-item">
                         {{ $posts->links() }}
@@ -32,7 +34,7 @@
                 </div>
 
             @else
-                <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">You don't have crete any post yet!</div>
+                <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">You don't have create any post yet!</div>
             @endif
 
         </div>

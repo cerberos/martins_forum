@@ -21,6 +21,10 @@ class Post extends Model
             $builder->withCount('replies');
         });
 
+        static::deleting(function ($post){
+            $post->replies()->delete();
+        });
+
     }
 
     public function user()

@@ -21,16 +21,104 @@
 @include('layouts.nav')
 
 <!-- Modal -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+@guest
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @include('auth.login')
+                </div>
+            </div>
+        </div>
+    </div>
+@endguest
+
+<div class="modal fade bd-example-modal-lg" id="advSearch" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            {{--<div class="modal-header">--}}
-            {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-            {{--<span aria-hidden="true">&times;</span>--}}
-            {{--</button>--}}
-            {{--</div>--}}
             <div class="modal-body">
-                @include('auth.login')
+                <h3 class="level-item">Search by:</h3>
+                <hr>
+
+                <form class="form-inline level-item" action="/search/user" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="userName" class="sr-only">username</label>
+                        <input type="text" readonly class="form-control-plaintext" value="User's Name">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="userName" placeholder="Name Surname" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <hr>
+
+                <form class="form-inline level-item" action="/search/category" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="userName" class="sr-only">category</label>
+                        <input type="text" readonly class="form-control-plaintext" value="Category's title or body">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="category" placeholder="Categry's key word"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <hr>
+
+                <form class="form-inline level-item" action="/search/post" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="userName" class="sr-only">post</label>
+                        <input type="text" readonly class="form-control-plaintext" value="Post's title or body">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="post" placeholder="Post's key word"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <hr>
+
+                <form class="form-inline level-item" action="/search/reply" method="POST">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="userName" class="sr-only">reply</label>
+                        <input type="text" readonly class="form-control-plaintext" value="Reply's body">
+                    </div>
+                    <div class="form-group mx-sm-3">
+                        <input type="text" class="form-control" name="reply" placeholder="Post's key word"
+                               required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <hr>
+
+                <form class="form-inline level-item" action="/search/postTime" method="POST">
+                    {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="userName" class="sr-only">from</label>
+                            <input type="text" readonly class="form-control-plaintext" value="Post's from">
+                        </div>
+                        <div class="form-group mx-md-3">
+                            <input class="form-control" type="date" value="{{ Carbon\Carbon::now() }}" name="from"
+                                   id="example-date-input" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="userName" class="sr-only">to</label>
+                            <input type="text" readonly class="form-control-plaintext" value="to">
+                        </div>
+                        <div class="form-group mx-md-2">
+                            <input class="form-control" type="date" value="{{ Carbon\Carbon::now() }}" name="to"
+                                   id="example-date-input" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary  mx-md-2">Search</button>
+                </form>
+                <hr>
+
             </div>
         </div>
     </div>
