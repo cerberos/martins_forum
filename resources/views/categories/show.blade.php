@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+
+    <div class="title"> Categories Posts </div>
+    <hr>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">

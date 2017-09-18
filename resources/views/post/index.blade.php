@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+
+        <div class="title"> Posts </div>
+        <hr>
+
         <div class="row">
             @if(count($posts) > 0 )
 

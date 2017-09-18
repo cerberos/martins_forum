@@ -27,6 +27,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+        static::deleting(function ($user){
+            $user->replies()->forceDelete();
+            $user->posts()->forceDelete();
+        });
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -35,6 +43,11 @@ class User extends Authenticatable
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role > 99;
     }
 
     public function path()

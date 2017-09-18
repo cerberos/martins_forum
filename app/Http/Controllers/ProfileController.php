@@ -15,7 +15,11 @@ class ProfileController extends Controller
         $id = resolve('App\GeneralMethods')->decrypt($id);
         $user = User::find($id);
         $posts = $user->posts()->latest()->take(5)->get();
-        $replies = $user->replies()->latest()->take(5)->get();
+        $replies = $user->replies()->with('post')->latest()->take(5)->get();
+
+//        foreach ($replies as $r){
+//            return $r->post->path();
+//        }
 
         return view('profile.index', compact(['active', 'user', 'posts', 'replies']));
     }

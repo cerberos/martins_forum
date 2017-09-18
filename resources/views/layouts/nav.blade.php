@@ -38,6 +38,11 @@
                         <a href="{{ route('register') }}"
                            class="nav-link">Register</a></li>
                     @else
+                        @if(auth()->user()->isAdmin())
+                            <li class="nav-item justify-content-end"><a href="/admin"
+                                                                        class="nav-link">Admin Dashboard</a></li>
+                        @endif
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
@@ -63,9 +68,11 @@
 
         <form class="form-inline mt-3 mt-md-0" method="POST" action="/search">
             {{ csrf_field() }}
-            <input name="searchValue" class="form-control mr-sm-1" type="text" placeholder="Search" aria-label="Search" required>
+            <input name="searchValue" class="form-control mr-sm-1" type="text" placeholder="Search" aria-label="Search"
+                   required>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            <a class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="modal" data-target="#advSearch">Adv. Search</a>
+            <a class="btn btn-outline-success my-3 my-sm-0" type="button" data-toggle="modal" data-target="#advSearch">Adv.
+                Search</a>
         </form>
     </div>
 </nav>

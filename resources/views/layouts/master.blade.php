@@ -103,7 +103,7 @@
                             <input type="text" readonly class="form-control-plaintext" value="Post's from">
                         </div>
                         <div class="form-group mx-md-3">
-                            <input class="form-control" type="date" value="{{ Carbon\Carbon::now() }}" name="from"
+                            <input class="form-control" type="date" value="{{ Carbon\Carbon::today()->toDateString() }}" name="from"
                                    id="example-date-input" required>
                         </div>
                         <br>
@@ -112,7 +112,7 @@
                             <input type="text" readonly class="form-control-plaintext" value="to">
                         </div>
                         <div class="form-group mx-md-2">
-                            <input class="form-control" type="date" value="{{ Carbon\Carbon::now() }}" name="to"
+                            <input class="form-control" type="date" value="{{ Carbon\Carbon::now()->toDateString() }}" name="to"
                                    id="example-date-input" required>
                         </div>
                         <button type="submit" class="btn btn-primary  mx-md-2">Search</button>

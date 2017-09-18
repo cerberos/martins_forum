@@ -32,7 +32,7 @@ class SearchController extends Controller
     {
         $this->validate(request(), ['userName' => 'required']);
         $name = request('userName');
-        $users = User::where('name','like', "%$name%")->get();
+        $users = User::where('name','like', "%$name%")->paginate(env('HOME_PAGINATE', 15));
         return view('search.usersname', compact('users'));
     }
 
@@ -44,7 +44,7 @@ class SearchController extends Controller
 
         $categories = Category::where('title', 'like', "%$a%")
             ->orWhere('description', 'like', "%$a%")
-            ->get();
+            ->paginate(env('HOME_PAGINATE', 15));
 
         return view('search.categories', compact('categories'));
     }
@@ -57,7 +57,7 @@ class SearchController extends Controller
 
         $posts = Post::latest()->where('title', 'like', "%$a%")
             ->orWhere('description', 'like', "%$a%")
-            ->get();
+            ->paginate(env('HOME_PAGINATE', 15));
 
         return view('search.posts', compact('posts'));
     }
@@ -68,7 +68,7 @@ class SearchController extends Controller
 
         $a = request('reply');
 
-        $replies = Reply::where('body', 'like', "%$a%")->with('post')->get();
+        $replies = Reply::where('body', 'like', "%$a%")->with('post')->paginate(env('HOME_PAGINATE', 15));
 
         return view('search.replies', compact('replies'));
     }
@@ -84,7 +84,7 @@ class SearchController extends Controller
         request('to') > request('from') ? $to = request('to') : $to = request('from') ;
 
         $posts = Post::whereBetween('created_at', [$from,$to])
-            ->get();
+            ->paginate(env('HOME_PAGINATE', 15));
 
         return view('search.posts', compact('posts'));
 

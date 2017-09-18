@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+
+    <div class="title"> Replies Search </div>
+    <hr>
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @forelse($replies as $p)
@@ -8,6 +12,10 @@
             @empty
                 <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">There are no records this time</div>
             @endforelse
+        </div>
+
+        <div class="level-item">
+            {{ $replies->links() }}
         </div>
     </div>
 @endsection

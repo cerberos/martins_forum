@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+
+    <div class="title"> Categories </div>
+    <hr>
+
     <div class="row">
         <div class="col-md-8">
 

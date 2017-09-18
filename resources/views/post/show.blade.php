@@ -2,6 +2,9 @@
 
 @section('content')
 
+    <div class="title"> Posts Replies</div>
+    <hr>
+
     <div class="modal fade" id="editReply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
