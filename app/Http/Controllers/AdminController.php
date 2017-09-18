@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use App\Reply;
 use App\User;
@@ -31,7 +32,8 @@ class AdminController extends Controller
 
     public function categories()
     {
-        return view('admin.categories');
+        $categories = Category::paginate(env('HOME_PAGINATE', 15));
+        return view('admin.categories', compact('categories'));
     }
 
     public function users()

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="title"> Categories Posts </div>
+    <div class="title"> Category's Posts </div>
     <hr>
 
     <div class="container">

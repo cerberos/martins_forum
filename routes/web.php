@@ -12,7 +12,14 @@ Route::patch('/post/{id}', 'PostController@patch');
 Route::get('/posts', 'PostController@index');
 Route::post('/post', 'PostController@store');
 Route::post('/post/{id}/replies', 'ReplyController@store');
+
 Route::get('/category/{id}', 'CategoryController@show');
+Route::delete('/category/{id}', 'CategoryController@destroy');
+Route::patch('/category/{id}', 'CategoryController@patch');
+Route::post('/category/store', 'CategoryController@store');
+
+
+
 Route::get('/profile/{id}', 'ProfileController@index')->name('profile');
 Route::delete('/profile/{id}', 'AdminController@destroyUser');
 Route::get('/profile/{id}/{name}', 'ProfileController@show');

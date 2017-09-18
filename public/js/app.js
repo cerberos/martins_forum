@@ -39,3 +39,22 @@ $('#replySubmit').click(function() {
 $('#postSubmit').click(function() {
     $("#postForm").submit();
 });
+
+$('#categorySubmit').click(function() {
+    $("#categoryForm").submit();
+});
+
+$('#editCategory').on('shown.bs.modal', function () {
+    $('#categoryTitle').focus();
+})
+
+$('#editCategory').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) ;// Button that triggered the modal
+    var title = button.data('title');
+    var description = button.data('description');
+    var destination = button.data('destination');
+    var modal = $(this);
+    modal.find('#categoryForm').attr('action',destination);
+    modal.find('#categoryTitle').val(title);
+    modal.find('#categoryBody').val(description);
+})

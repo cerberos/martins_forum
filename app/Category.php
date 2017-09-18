@@ -12,6 +12,7 @@ class Category extends Model
         'title', 'description'
     ];
 
+
     protected $guarded = [];
 
     public static function boot()
@@ -20,6 +21,15 @@ class Category extends Model
 
         static::addGlobalScope('postCount', function ($builder) {
             $builder->withCount('posts');
+        });
+
+        static::deleting(function ($category){
+            $category->posts()->each(function ($post){
+                $post->replies()->forceDelete();
+            });
+
+
+            $category->posts()->forceDelete();
         });
 
     }
