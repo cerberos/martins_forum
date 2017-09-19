@@ -22,7 +22,7 @@ class SearchController extends Controller
         $repliesBody = Reply::where('body', 'like', "%$searchValue%")->with('post')->get();
 
         foreach ($repliesBody as $r) {
-            $post[] = $r->post;
+           $post[] = $r->post;
         }
 
         return view('search.index', compact('post'));

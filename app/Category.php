@@ -23,15 +23,6 @@ class Category extends Model
             $builder->withCount('posts');
         });
 
-        static::deleting(function ($category){
-            $category->posts()->each(function ($post){
-                $post->replies()->forceDelete();
-            });
-
-
-            $category->posts()->forceDelete();
-        });
-
     }
 
 

@@ -19,15 +19,15 @@ class AdminController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role < 100){
+        if (Auth::user()->role < 100) {
             return redirect('/')->withErrors('You are not an administrator!');
         }
 
-        $replies = Reply::latest()->take('10')->with(['post','user'])->get();
-        $postCount = Post::whereBetween('created_at',[Carbon::today(),Carbon::now()])->count();
-        $replyCount = Reply::whereBetween('created_at',[Carbon::today(),Carbon::now()])->count();
+        $replies = Reply::latest()->take('10')->with(['post', 'user'])->get();
+        $postCount = Post::whereBetween('created_at', [Carbon::today(), Carbon::now()])->count();
+        $replyCount = Reply::whereBetween('created_at', [Carbon::today(), Carbon::now()])->count();
 
-        return view('admin.index', compact(['replies','postCount', 'replyCount']));
+        return view('admin.index', compact(['replies', 'postCount', 'replyCount']));
     }
 
     public function categories()
@@ -45,12 +45,14 @@ class AdminController extends Controller
     public function destroyUser($id)
     {
         $id = resolve('App\GeneralMethods')->decrypt($id);
-       if(Auth::user()->isAdmin()){
+        if (Auth::user()->isAdmin()) {
             $user = User::find($id);
+            $user->replies()->forceDelete();
+            $user->posts()->forceDelete();
             $user->forceDelete();
             return back();
-       }
+        }
 
-       return back()->withErrors('You are not an administrator!');
+        return back()->withErrors('You are not an administrator!');
     }
 }

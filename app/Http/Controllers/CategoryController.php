@@ -63,6 +63,12 @@ class CategoryController extends Controller
         if(Auth::user()->isAdmin()) {
             $id = resolve('App\GeneralMethods')->decrypt($id);
             $category = Category::find($id);
+
+            $category->posts()->each(function ($post){
+                $post->replies()->forceDelete();
+            });
+
+            $category->posts()->forceDelete();
             $category->forceDelete();
             return back();
         }

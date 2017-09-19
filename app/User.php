@@ -27,14 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function boot()
-    {
-        static::deleting(function ($user){
-            $user->replies()->forceDelete();
-            $user->posts()->forceDelete();
-        });
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class);

@@ -49,7 +49,7 @@ class ReplyController extends Controller
 
         $this->authorize('update', $reply);
 
-        $reply->delete();
+        $reply->forceDelete();
 
         return back();
     }

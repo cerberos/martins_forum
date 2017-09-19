@@ -94,6 +94,8 @@ class PostController extends Controller
 
         $this->authorize('update', $post);
 
+
+        $post->replies()->forceDelete();
         $post->forceDelete();
 
         return redirect('/posts');

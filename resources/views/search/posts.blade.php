@@ -13,9 +13,9 @@
                 <div class="col-md-12 p-3 mb-2 bg-info text-white level-item">There are no records this time</div>
             @endforelse
         </div>
+    </div>
 
-        <div class="level-item">
-            {{ $posts->links() }}
-        </div>
+    <div class="level-item">
+        {{ $posts->links() }}
     </div>
 @endsection
